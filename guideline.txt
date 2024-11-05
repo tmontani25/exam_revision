@@ -1,0 +1,13 @@
+REVISION EXAM
+
+learning process:
+- voir notions
+- reformuler tester
+- exercices
+
+champ:
+bitshifting de base
+get_next_line
+printf
+scanf
+
