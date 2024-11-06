@@ -12,7 +12,7 @@ printf
 scanf
 
 bitshifting
-recherche de base
+recherche de base ✅
 binaire hexadecimal decimal conversion voir theorie
 reformuler tester
 exercices:
