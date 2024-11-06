@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-char shift(char c)
+char shift(unsigned char c)
 {
     c = c << 1;
 
@@ -9,9 +9,9 @@ char shift(char c)
 
 int main(void)
 {
-    char c;
-    char b;
-
+    unsigned char c;
+    unsigned char b;
+    
     c = 'c';
 
     b = shift(c);

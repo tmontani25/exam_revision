@@ -13,7 +13,12 @@ scanf
 
 bitshifting
 recherche de base
-exercices
+binaire hexadecimal decimal conversion voir theorie
+reformuler tester
+exercices:
+    essayer sans theorie + chat gpt
+    regarder differentes methode
+    voir notions et ressayer
 
 get_next_line
 recall lire consigne
