@@ -11,3 +11,22 @@ get_next_line
 printf
 scanf
 
+bitshifting
+recherche de base
+exercices
+
+get_next_line
+recall lire consigne
+refaire en entier
+
+scanf
+recherche fonctionnement de base video
+decouper les etapes
+lire le code et noter les notions non connues
+voir les notions
+tester dans printf
+
+printf
+recall lire consigne
+refaire
+
