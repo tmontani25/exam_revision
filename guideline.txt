@@ -21,7 +21,7 @@ exercices:
     voir notions et ressayer
 
 get_next_line
-recall lire consigne
+lire le code
 refaire en entier
 
 scanf
@@ -32,6 +32,16 @@ voir les notions
 tester dans printf
 
 printf
-recall lire consigne
+lire le code
 refaire
+
+filter:
+comprehension du probleme en general ✅
+liste notions importantes
+recherche de base notions
+decouper probleme
+structurer le code / coder une version simple
+recherche en profondeur des notions
+implementation test debug
+
 
