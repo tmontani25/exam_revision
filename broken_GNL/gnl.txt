@@ -1,8 +1,0 @@
-lire une ligne d'un  fd jusqu'a \n ou eof
-lire la prochaine ligne...
-
-coder une version simple
-implementer le reste
-
-lire une ligne d'un fd avec read buffer size par buffer size
-jusqu'a \n ou eof
