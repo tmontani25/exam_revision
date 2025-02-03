@@ -28,3 +28,5 @@ la valeur qui est stockee dans board de i est la ligne a laquelle est placee la 
 ^
 |
 Lignes
+
+formule diagonale x1 - x2 = y1 - y2

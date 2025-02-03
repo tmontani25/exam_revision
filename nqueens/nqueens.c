@@ -20,11 +20,11 @@ int is_safe(int *board, int line, int col)
 
 void solve_n_queens(int n, int col, int *board)
 {
-    // n = nombre de colones et nb lignes
+    // n = nombre de colones et nb lignes et reines
 	int	i;
 
 	i = 0;
-	if (col == n)
+	if (col == n)  // si toutes les colonnes ont etees parcourues
 	{
 		while (i < n)
 		{
@@ -42,19 +42,21 @@ void solve_n_queens(int n, int col, int *board)
 	i = 0;
 	while (i < n) // on fait toutes les lignes
 	{
-		if (is_safe(board, i, col))  // premier passage col = 0; et i = 0; 
+		if (is_safe(board, i, col))  // la premiere boucle va verifier pour la colonne 0 les lignes safe
 		{
+			// si on peut placer une reine on la place et on rapelle la fonction avec cette reine placee
 			board[col] = i; // dans la colonne je place la reine sur la ligne i
-			solve_n_queens(n, col + 1, board); // envoie la colonne suivante (va reverifier toutes les colonnes precedentes a chaque fois)
-		}
-		i++;
+			solve_n_queens(n, col + 1, board); // envoie la colonne suivante pour verifier cette possibilite
+		} 
+		i++;// si la ligne n'est pas safe i++ essaye une autre ligne
 	}
     // verifie si chaque position est ok
 }
+// l'appel recursif dans cette fonction n'est fait que si la position est valable pour aller trouver la position de la prochaine reine
 
 int main(int argc, char *argv[])
 {
-	int	n;
+	int	n; // taille echiquier
 	if (argc != 2)
 	{
 		fprintf(stderr, "Usage: %s <n>\n", argv[0]);
