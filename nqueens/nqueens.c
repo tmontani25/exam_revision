@@ -1,23 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// j'ai fait des modifs sans faire expres donc faux cf github
 int is_safe(int *board, int line, int col)
 {
 	//il ne peut y avoir qu'une seule reine par colonne donc board[i] = la ligne sur laquelle est placee la reine sur la colonne i
 	int	i;
-
-	i = 0;
+	
 	while (i < col) // i les colonnes qui precede col
 	{
-		if (board[i] == line // si il y une reine sur la meme ligne pas ok
-			|| (board[i] - line == i - col) // diagonale descendante
-			|| (board[i] - line == col - i)) // diagonale montante
+		if (board[i] == line // si il y une reine sur la meme ligne pas ok  board[i] vaut ligne
+			|| (board[i] - line == i - col) // diagonale descendante ligne1 - ligne2 = col1 - col2
+			|| (board[i] - line == col - i)) // diagonale montante ligne1 - ligne2 = col2 - col1
 			return (0);
 		i++;
-	}
-	return (1);
-}
-
+	}											//board[i] = ligne verif
+	return (1);									//line = line target
+}												// i = colonne verif
+												//col = colonne target
 void solve_n_queens(int n, int col, int *board)
 {
     // n = nombre de colones et nb lignes et reines
@@ -30,7 +30,7 @@ void solve_n_queens(int n, int col, int *board)
 		{
 			fprintf(stdout, "%d", board[i]);
 			if (i < n - 1)
-				fprintf(stdout, " ");
+				fprintf(stdout, " ");  //imprime les espaces entre les nb de l'output
 			i++;
 		}
 		fprintf(stdout, "\n");
@@ -40,15 +40,15 @@ void solve_n_queens(int n, int col, int *board)
 
 
 	i = 0;
-	while (i < n) // on fait toutes les lignes
+	while (i < n) // on fait toutes les lignes 
 	{
 		if (is_safe(board, i, col))  // la premiere boucle va verifier pour la colonne 0 les lignes safe
 		{
 			// si on peut placer une reine on la place et on rapelle la fonction avec cette reine placee
 			board[col] = i; // dans la colonne je place la reine sur la ligne i
 			solve_n_queens(n, col + 1, board); // envoie la colonne suivante pour verifier cette possibilite
-		} 
-		i++;// si la ligne n'est pas safe i++ essaye une autre ligne
+		}
+		i++;// si la ligne n'est pas safe i++ essaye une autre ligne 
 	}
     // verifie si chaque position est ok
 }

@@ -18,7 +18,7 @@ void	bubble_sort(char *set, int size)
 	char	tmp;
 
 	i = 0;
-	while (i < size - 1)
+	while (i < size - 1) //
 	{
 
 		j = 0;
@@ -41,7 +41,7 @@ void process(char *set, int size, char *tmp, int *placed, int idx)
 	int	i;
 
 	i = 0;
-	if (idx == size)
+	if (idx == size) // condition de fin de recursion tout parcouru
 	{
 		tmp[idx] = '\0';
 		puts(tmp);
@@ -49,27 +49,27 @@ void process(char *set, int size, char *tmp, int *placed, int idx)
 	}
 	while (i < size)
 	{
-		if (!placed[i]) // si un caractere n'a pas encore ete place on le place
-		{                                                   // si il n'a pas ete place on le place et on marque placed
-        	placed[i] = 1;                                  // on rappelle la fonction avec l'index suivant dans temp
-			tmp[idx] = set[i];                              //et comme le caractere a ete place placed[i] = 1 ca fait i++;
-			process(set, size, tmp, placed, idx + 1);       // ce qui permet de checker le caractere suivant
-			placed[i] = 0;                                                      //si il a deja ete place i++; caractere suivant
+		if (!placed[i]) 
+		{      
+        	placed[i] = 1;                             
+			tmp[idx] = set[i];                 
+			process(set, size, tmp, placed, idx + 1);     //index suivant 
+			placed[i] = 0;                                    
 		}
-		i++;
+		i++; // caractere suivant change le caractere a l'index 0
 	}
 }
 
 
 
-int main(int argc, char **argv) // sert a avoir la chaine dans l'ordre alphabetique
+int main(int argc, char **argv) 
 {
 	if (argc != 2)
 		return (1);
 	int	size;
 	size = ft_strlen(argv[1]);
 
-	char	set[size];
+	char	set[size]; // tableau des caracteres
 	char	tmp[size + 1]; // tableau pour les permutations
 	int		placed[size]; // caracteres utilises
 	int		i;
@@ -82,7 +82,7 @@ int main(int argc, char **argv) // sert a avoir la chaine dans l'ordre alphabeti
 		i++;
 	}
 	tmp[size] = '\0';
-	bubble_sort(set, size);
+	bubble_sort(set, size); // sert a avoir la chaine dans l'ordre alphabetique
 	process(set, size, tmp, placed, 0);
 	return (0);
 }
