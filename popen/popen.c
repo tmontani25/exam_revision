@@ -28,7 +28,7 @@ int ft_popen(const char *file, const char *argv[], char type)
     {
         if (type == 'r') {
             close(fd[0]); // Ferme la lecture dans le fils
-            dup2(fd[1], STDOUT_FILENO); // Redirige stdout vers le pipe
+            dup2(fd[1], STDOUT_FILENO); // Redirige stdout vers le write du pipe
             close(fd[1]);
         }
         else if (type == 'w') {

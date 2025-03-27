@@ -25,13 +25,13 @@ int picoshell(char **cmds[])
 				dup2(prev_fd, STDIN_FILENO);
 				close(prev_fd);
 			}
-			if(cmds[i+1]) // si il y a plusieurs commandes
+			if(cmds[i+1]) // si il y a une commande suivante
 			{
 				close(fd[0]);//ferme le read
 				dup2(fd[1], STDOUT_FILENO);//redirige la sortie standard vers le write
 				close(fd[1]);
 			}
-			execvp(cmds[i][0], cmds[i]); // execute la commande si ca marche ca exit le process enfant
+			execvp(cmds[i][0], cmds[i]); //la cmd et la cmd + les args execute la commande si ca marche ca exit le process enfant
 			exit(1); // si ca ne marche pas on exit avec 1
 		}
 		else // parent sert a fermer les pipes
@@ -41,7 +41,7 @@ int picoshell(char **cmds[])
 			if(cmds[i+1]) // si il y a plusieurs commandes
 			{
 				close(fd[1]); //ferme le write
-				prev_fd = fd[0]; //prev_fd devient le read
+				prev_fd = fd[0]; //prev_fd devient le read permet de lire ce qui a ete execute 
 			}
 		}
 		i++;

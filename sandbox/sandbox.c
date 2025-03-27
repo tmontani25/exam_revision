@@ -23,15 +23,15 @@ int	sandbox(void (*f)(void), unsigned int timeout, bool verbose)
 	int			wstatus;
 	struct sigaction	act;
 
-	act.sa_handler = alarm_handler;
-	act.sa_flags = 0;
-	sigemptyset(&act.sa_mask);
-	if (sigaction(SIGALRM, &act, NULL) == -1)
+	act.sa_handler = alarm_handler; // setup le gestionnaire de signal
+	act.sa_flags = 0; // pas de flags
+	sigemptyset(&act.sa_mask);// masque vide
+	if (sigaction(SIGALRM, &act, NULL) == -1) // attribue le gestionnaire act a SIGALRM
 	{
 		printf("sigaction failed\n");
 		return (INTERNAL_ERROR);
 	}
-	pid = fork();
+	pid = fork(); // cree le child pour tester la fonction
 	if (pid == -1)
 	{
 		printf("fork failed\n");
@@ -39,43 +39,43 @@ int	sandbox(void (*f)(void), unsigned int timeout, bool verbose)
 	}
 	if (pid == 0)
 	{
-		f();
+		f(); // execute la fonction
 		exit(0);
 	}
 	else
 	{
-		alarm(timeout);
-		wpid = waitpid(pid, &wstatus, 0);
-		alarm(0);
+		alarm(timeout); // lance l'alarme au bout de timeout secondes
+		wpid = waitpid(pid, &wstatus, 0); // attend la fin du child
+		alarm(0); // desactive l'alarme
 		if (wpid == -1)
 		{
-			if (errno == EINTR)
+			if (errno == EINTR) // si le waitpid a ete interrompu par le signal sigalarm
 			{
 				if (verbose)
 					printf("Bad function: timed out after %d seconds\n", timeout);
-				kill(pid, SIGKILL);
-				waitpid(pid, NULL, 0);
+				kill(pid, SIGKILL); // tue le child
+				waitpid(pid, NULL, 0); //nettoie le child
 				return (BAD_FUNCTION);
 			}
-			return (INTERNAL_ERROR);
+			return (INTERNAL_ERROR); // si wpid = -1 soit errno = EINTR donc sigalarm a interrompu soit internal error
 		}
-		if (WIFSIGNALED(wstatus))
+		if (WIFSIGNALED(wstatus)) // si le processus s'est termine a cause d'un signal == vrai
 		{
 			if (verbose)
-				printf("Bad function: %s\n", strsignal(WTERMSIG(wstatus)));
+				printf("Bad function: %s\n", strsignal(WTERMSIG(wstatus))); //wtermsig renvoie le num du signal et strsignal la bonne phrase
 			return (BAD_FUNCTION);
 		}
-		if (WIFEXITED(wstatus))
+		if (WIFEXITED(wstatus)) // si tout ok pas de sigalarm ou de autre erreur voir strsignal
 		{
-			int exit_code = WEXITSTATUS(wstatus);
-			if (exit_code != 0)
+			int exit_code = WEXITSTATUS(wstatus); // renvoie l'exit code du child process
+			if (exit_code != 0) // si c'est pas 0 la fonction est mauvaise
 			{
 				if (verbose)
 					printf("Bad function: exited with code %d\n", exit_code);
 				return (BAD_FUNCTION);
 			}
 		}
-		if (verbose)
+		if (verbose) // si tout va bien
 			printf("Nice function!\n");
 		return (NICE_FUNCTION);
 	}
